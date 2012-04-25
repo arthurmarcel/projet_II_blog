@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
+gem 'therubyracer'
 
+group :test, :development do
+	gem 'rspec-rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+end
+	
 gem 'rails', '3.2.2'
 
 # Bundle edge Rails instead:
@@ -15,7 +22,6 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-	gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
   gem "rspec-rails"

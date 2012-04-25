@@ -1,4 +1,11 @@
 ProjetIiBlog::Application.routes.draw do
+
+	root :to => 'posts#index'
+  resources :posts
+  
+  match 'sessions/new' => 'sessions#new', :as => :signin
+  match 'blog.fr/sessions' => 'sessions#new'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
