@@ -5,9 +5,13 @@ ProjetIiBlog::Application.routes.draw do
 	root :to => 'posts#index'
 	
   resources :posts
+  resources :comments
   
   match 'sessions/new' => 'sessions#new', :as => :signin
+  match 'sessions/destroy' => 'sessions#destroy', :as => :logout
   match 'blog.fr/sessions' => 'sessions#new'
+  match 'sessions/loginforspec' => 'sessions#log_in_for_spec'
+  match 'sessions/logoutforspec' => 'sessions#log_out_for_spec'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

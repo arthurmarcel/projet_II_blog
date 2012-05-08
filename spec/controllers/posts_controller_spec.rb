@@ -43,7 +43,7 @@ describe PostsController do
 			@post.stub(:save){true}
 			Post.stub(:new){ @post }
 			post 'create'
-			response.should redirect_to(@post)
+			response.should redirect_to(posts_path)
 		end
 		
 		it "should reload the form if it failed" do
@@ -57,20 +57,4 @@ describe PostsController do
 			response.should redirect_to(signin_path)
 		end
   end
-  
-  describe "GET '/posts/:id'" do
-  	it "should display post content" do
-  		@post = Post.new()
-  		@post.author = "tututu"
-  		@post.title = "tititititititi"
-  		@post.body = "tatatatatatatatatatatatatatatatatatatatatatatatata"
-  		
-  		Post.stub(:find_by_id){@post}
-  		
-  		get 'show', :id => 22
-  		
-  		response.should render_template(:show)
-  	end
-  end
-  
 end

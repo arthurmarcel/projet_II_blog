@@ -3,6 +3,7 @@ require "base64"
 class SessionsController < ApplicationController
 	
 	before_filter :require_not_logged, :only => [:new]
+	before_filter :require_logged, :only => [:destroy]
 
   def require_not_logged
     unless current_user.nil?
@@ -10,8 +11,24 @@ class SessionsController < ApplicationController
     end
   end
   
+  def require_logged
+    if current_user.nil?
+	    redirect_to posts_path, notice: 'You are not logged !'
+    end
+  end
+  
   def current_user
 		return session[:current_user]
+  end
+  
+  def log_in_for_spec
+  	session[:current_user] = "toto"
+  	redirect_to posts_path
+  end
+  
+  def log_out_for_spec
+  	session[:current_user] = nil
+  	redirect_to posts_path
   end
 
 	def new
@@ -41,5 +58,10 @@ class SessionsController < ApplicationController
 			session["#{var}"] = Time.now.to_i
 			redirect_to "http://localhost:4567/sauth/sessions/new?app=blog&origin=sessions&secret=#{encoded}"
 		end
+	end
+	
+	def destroy
+		session[:current_user] = nil
+		redirect_to posts_path
 	end
 end

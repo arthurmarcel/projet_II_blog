@@ -14,7 +14,14 @@ class PostsController < ApplicationController
   end  
 
 	def index
+		@user = current_user
+		@comment = Comment.new
 		@posts = Post.all
+		
+		@comments_list = Hash.new
+		@posts.each do |post|
+			@comments_list["#{post.id}"] = Comment.where(:post_id => post.id)
+		end
   end
   
   def new

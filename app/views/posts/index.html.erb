@@ -6,11 +6,44 @@
   	<div class="post">
 			<div class="author">Author : <%= post.author %> </div><br/>
 			<div class="title">Title : <%= post.title %></div><br/>
-			<div class="body">Post : <%= post.body %></div>
+			<div class="body">Post : <%= post.body %></div><br/>
+			
+			Comments :<br/>
+			<ul> 
+				<% if @comments_list.has_key?("#{post.id}") && !@comments_list["#{post.id}"].empty?%>
+					<% @comments_list["#{post.id}"].each do |comment| %>
+						<li>
+							From <%= comment.author %> : <%= comment.body %>
+						</li><br/>
+					<% end %>
+				<% end %>
+			
+				<li>
+					<form class="comment_form" method="post" action="/comments">
+						<input type="HIDDEN" name="post_id" value="<%= post.id %>"/>
+				
+						<% if @user.nil? %>
+							<input type="HIDDEN" name="author" value="Anonymous"/>
+						<% else %>
+							<input type="HIDDEN" name="author" value="<%= @user %>"/>
+						<% end %>
+
+						<input type="text" name="body" value="Leave a new comment..." onblur="if (this.value == '') {this.value = 'Leave a new comment...';}"  
+							onfocus="if (this.value == 'Leave a new comment...') {this.value = '';}"/>
+							
+						<input type="submit" value="Add it!" />
+					</form>
+				</li>
+			</ul>
+			
 		</div>
   </li><br/>
 <% end %>
 </ul>
 
 <a href="/posts/new">Create a new post</a><br/>
-<a href="/sessions/new">Log In</a>
+<% if @user.nil? %>
+	<a href="/sessions/new">Log In</a>
+<% else %>
+	<a href="/sessions/destroy">Log Out</a>
+<% end %>
