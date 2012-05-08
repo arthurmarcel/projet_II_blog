@@ -9,5 +9,7 @@ describe "posts/index.html.erb" do
     render
     rendered.should =~ /sujet 1/
     rendered.should =~ /sujet 2/
+    rendered.should =~ /new post/
+    rendered.should =~ /Log In/
   end
 end

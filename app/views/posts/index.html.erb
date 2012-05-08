@@ -3,12 +3,14 @@
 <ul>  
 <% @posts.each do |post| %> 
   <li>
-  	<div class="author">Author : <%= post.author %> </div><br/>
-  	<div class="title">Title : <%= post.title %></div><br/>
-  	<div class="body">Post : <%= post.body %></div>
+  	<div class="post">
+			<div class="author">Author : <%= post.author %> </div><br/>
+			<div class="title">Title : <%= post.title %></div><br/>
+			<div class="body">Post : <%= post.body %></div>
+		</div>
   </li><br/>
 <% end %>
 </ul>
 
+<a href="/posts/new">Create a new post</a><br/>
 <a href="/sessions/new">Log In</a>
-<a href="/posts/new">Create a new post</a>

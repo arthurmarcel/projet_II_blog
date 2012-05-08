@@ -5,9 +5,13 @@ class SessionsController < ApplicationController
 	before_filter :require_not_logged, :only => [:new]
 
   def require_not_logged
-    if session[:current_user]
+    unless current_user.nil?
 	    redirect_to posts_path, notice: 'You are already logged !'
     end
+  end
+  
+  def current_user
+		return session[:current_user]
   end
 
 	def new

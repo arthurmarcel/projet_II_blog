@@ -20,4 +20,8 @@ describe PostsController do
   it "should route POST /posts to post#create" do
   	post('/posts').should route_to("posts#create")
   end
+  
+  it "should route GET /posts/:id to post#show" do
+  	get('/posts/22').should route_to("posts#show", :id => "22")
+  end
 end

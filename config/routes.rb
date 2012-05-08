@@ -1,6 +1,9 @@
 ProjetIiBlog::Application.routes.draw do
 
+  get "posts/show"
+
 	root :to => 'posts#index'
+	
   resources :posts
   
   match 'sessions/new' => 'sessions#new', :as => :signin

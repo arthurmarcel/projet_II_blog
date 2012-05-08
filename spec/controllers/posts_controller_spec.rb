@@ -58,4 +58,19 @@ describe PostsController do
 		end
   end
   
+  describe "GET '/posts/:id'" do
+  	it "should display post content" do
+  		@post = Post.new()
+  		@post.author = "tututu"
+  		@post.title = "tititititititi"
+  		@post.body = "tatatatatatatatatatatatatatatatatatatatatatatatata"
+  		
+  		Post.stub(:find_by_id){@post}
+  		
+  		get 'show', :id => 22
+  		
+  		response.should render_template(:show)
+  	end
+  end
+  
 end
