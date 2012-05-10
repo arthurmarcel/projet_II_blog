@@ -63,7 +63,11 @@ class PostsController < ApplicationController
 						redirect_to posts_path, notice: 'Post successfully destroyed, but errors when trying to detroy comments.'
 					end
 				end
-				redirect_to posts_path, notice: 'Post and related comments successfully destroyed.'
+				flash[:notice] = 'Post and related comments successfully destroyed.'
+				respond_to do |format|
+					format.html { redirect_to posts_url }
+					format.js
+				end
 			else
 				redirect_to posts_path, notice: 'Failed to destroy the post.'
 			end

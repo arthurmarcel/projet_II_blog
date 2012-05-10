@@ -4,19 +4,21 @@
 <ul>
 <% @posts.each do |post| %> 
   <li>
-  	<div class="post">
+  	<div class="post" id="<%= post.id %>">
 			<div class="author"><%= post.author %>, <%= post.formatted_created_at %></div><br/>
 			<div class="title"><%= post.title %></div><br/>
 			<div class="body"><%= post.body %></div><br/>
 			<%= button_to('Remove', "/posts/#{post.id}", :confirm => 'Are you sure?', :method => 'delete', :class => 'delete_post_button') %><br/>
 			
 			<input Type="image" onClick="toggleDiv('div<%= div_id %>', 'button<%= div_id %>');" src="/images/plusButton.gif" id="button<%= div_id %>"/>
-			Comments<br/>
+			<% nb = 0 
+				 nb = @comments_list["#{post.id}"].count if @comments_list.has_key?("#{post.id}") && !@comments_list["#{post.id}"].empty? %>
+			Comments (<%= nb %>)<br/>
 			
 			<div id="div<%= div_id %>" style="display:none">
 			
 				<ul> 
-					<% if @comments_list.has_key?("#{post.id}") && !@comments_list["#{post.id}"].empty?%>
+					<% if @comments_list.has_key?("#{post.id}") && !@comments_list["#{post.id}"].empty? %>
 						<% @comments_list["#{post.id}"].each do |comment| %>
 							<li>
 								<%= comment.author %>, <%= comment.formatted_created_at %><br/><br/>
