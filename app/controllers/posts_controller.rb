@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	
 	before_filter :require_login, :only => [:create, :new]
+	
 
   def require_login
     if current_user.nil?
@@ -9,9 +10,11 @@ class PostsController < ApplicationController
     end
   end
   
+  
   def current_user 
   	return session[:current_user]
   end  
+  
 
 	def index
 		@user = current_user
@@ -24,6 +27,7 @@ class PostsController < ApplicationController
 		end
   end
   
+  
   def new
 		@post = Post.new
 		
@@ -32,6 +36,7 @@ class PostsController < ApplicationController
 	    format.js
 	  end
   end
+  
   
   def create
 		@post = Post.new(params[:post])
@@ -46,4 +51,25 @@ class PostsController < ApplicationController
 	    end
 	  end
   end
+  
+  
+  def destroy
+		@post = Post.find_by_id(params[:id])
+  	if current_user == @post.author
+			if @post.destroy
+				@comments = Comment.where(:post_id => params[:id])
+				@comments.each do |comment|
+					if !comment.destroy
+						redirect_to posts_path, notice: 'Post successfully destroyed, but errors when trying to detroy comments.'
+					end
+				end
+				redirect_to posts_path, notice: 'Post and related comments successfully destroyed.'
+			else
+				redirect_to posts_path, notice: 'Failed to destroy the post.'
+			end
+		else
+			redirect_to posts_path, notice: 'ERROR : You\'re not connected with the good account.'
+		end
+  end
+  
 end

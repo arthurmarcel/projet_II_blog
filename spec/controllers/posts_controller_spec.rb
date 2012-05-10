@@ -57,4 +57,34 @@ describe PostsController do
 			response.should redirect_to(signin_path)
 		end
   end
+  
+  
+  describe "DELETE '/posts/:id'" do
+	 	it "should delete the post if connected user is the owner" do
+  		session[:current_user] = "toto"
+  		@post = Post.new
+  		@post.author = "toto"
+  		@post.stub(:destroy){true}
+  		@comments = ()
+  		Comment.stub(:find_by_post_id){@comments}
+  		Post.stub(:find_by_id){@post}
+  		
+  		delete 'destroy', :id => 666
+  		response.should redirect_to(posts_path)
+  		flash[:notice].should == 'Post and related comments successfully destroyed.'
+  	end
+  	
+  	it "should return an error if the user is not the owner" do
+  		@post = Post.new
+  		@post.author = "toto"
+  		@post.stub(:destroy){false}
+  		@comments = ()
+  		Comment.stub(:find_by_post_id){@comments}
+  		Post.stub(:find_by_id){@post}
+  		
+  		delete 'destroy', :id => 666
+  		response.should redirect_to(posts_path)
+  		flash[:notice].should == 'ERROR : You\'re not connected with the good account.'
+  	end
+  end
 end

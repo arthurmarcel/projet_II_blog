@@ -5,6 +5,35 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+<script>
+	function toggleDiv(id, source_id)
+	{
+		exp = new RegExp("/images/plusButton.gif","g");
+		//alert(document.getElementById(source_id).src);
+		if (exp.test(document.getElementById(source_id).src))
+		{
+			document.getElementById(source_id).src = '/images/minusButton.gif';
+		}
+		else
+		{
+			document.getElementById(source_id).src = '/images/plusButton.gif';
+		}
+		
+		itm = document.getElementById(id);	
+		if (itm.style.display == 'none')
+		{
+			itm.style.display = '';
+		}
+		else
+		{
+			itm.style.display = 'none';
+		}
+		
+		return false;
+	}
+</script>  
+
 </head>
 <body>
 
