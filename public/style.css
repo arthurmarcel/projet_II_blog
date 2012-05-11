@@ -1,0 +1,108 @@
+/* Header */
+header
+{
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#logo
+{
+	width: 100%;
+}
+
+/* Footer */
+footer
+{
+	padding-top: 10px;
+	margin-top: 40px;
+}
+
+#footer_img
+{
+	width: 100%;
+}
+
+
+
+/* Body */
+body
+{
+	font: 12px Georgia;
+	width: 75%;
+	margin: auto;
+}
+
+
+/* Title */
+h1
+{
+	font: bold 28px Georgia;
+}
+
+
+/* Post presentation */
+.post
+{
+	background-color:#e4e7ef;
+	padding-top: 18px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
+
+.author, .title
+{
+	font: bold 16px Georgia;
+}
+
+.comment_author
+{
+	font: bold 14px Georgia;
+}
+
+
+/* Posts List */
+ul.posts_li
+{
+  list-style-image: url(/images/avatar.png);
+}
+
+
+/* Comments List */
+ul.comment_li
+{
+	list-style: none;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 5px;
+}
+
+li.comment
+{
+	padding-top: 7px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-bottom: 7px;
+	background-color:#f1f0f0;
+	width: 95%;
+}
+
+
+/* Links */
+a
+{
+	text-decoration: none;
+	color: blue;
+}
+
+a:hover 
+{
+    text-decoration: underline;
+}
+
+
+/* Fields */
+.field
+{
+	margin-top: 1%;
+

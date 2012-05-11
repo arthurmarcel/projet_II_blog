@@ -1,14 +1,16 @@
 <h1>Posts List</h1>
 <p><%= notice%></p>
 <% div_id = 0 %>
-<ul>
+<ul class ="posts_li">
 <% @posts.each do |post| %> 
   <li>
-  	<div class="post" id="<%= post.id %>">
+		<div class="post" id="<%= post.id %>">
 			<div class="author"><%= post.author %>, <%= post.formatted_created_at %></div><br/>
 			<div class="title"><%= post.title %></div><br/>
 			<div class="body"><%= post.body %></div><br/>
-			<%= button_to('Remove', "/posts/#{post.id}", :confirm => 'Are you sure?', :method => 'delete', :class => 'delete_post_button') %><br/>
+			<% if (@user && @user == post.author) %>
+				<%= button_to('Remove', "/posts/#{post.id}", :confirm => 'Are you sure?', :method => 'delete', :class => 'delete_post_button') %><br/>
+			<% end %>
 			
 			<input Type="image" onClick="toggleDiv('div<%= div_id %>', 'button<%= div_id %>');" src="/images/plusButton.gif" id="button<%= div_id %>"/>
 			<% nb = 0 
@@ -17,11 +19,11 @@
 			
 			<div id="div<%= div_id %>" style="display:none">
 			
-				<ul> 
+				<ul class ="comment_li"> 
 					<% if @comments_list.has_key?("#{post.id}") && !@comments_list["#{post.id}"].empty? %>
 						<% @comments_list["#{post.id}"].each do |comment| %>
-							<li>
-								<%= comment.author %>, <%= comment.formatted_created_at %><br/><br/>
+							<li class="comment">
+								<div class="comment_author"><%= comment.author %>, <%= comment.formatted_created_at %></div><br/><br/>
 								<%= comment.body %>
 							</li><br/>
 						<% end %>
@@ -37,6 +39,7 @@
 								<input type="HIDDEN" name="author" value="<%= @user %>"/>
 							<% end %>
 
+							<img src="/images/comment_index.png" alt="puce" align="absmiddle" style="padding-right:10px;padding-top:1px;padding-bottom:5px;" />
 							<input type="text" name="body" value="Leave a new comment..." onblur="if (this.value == '') {this.value = 'Leave a new comment...';}"  
 								onfocus="if (this.value == 'Leave a new comment...') {this.value = '';}"/>
 							
