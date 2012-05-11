@@ -17,7 +17,7 @@ describe "AddNewComments" do
 			fill_in 'body', :with => "test comment"
 			click_button('Add it!')
 			page.should have_content "Posts List"
-			page.should have_content "From Anonymous"
+			page.should have_content "Anonymous,"
 			current_path.should == '/posts'
   	end
   end
@@ -27,7 +27,7 @@ describe "AddNewComments" do
 			fill_in 'body', :with => "test comment"
 			click_button('Add it!')
 			page.should have_content "Posts List"
-			page.should have_content "From toto"
+			page.should have_content "toto,"
 			current_path.should == '/posts'
   	end
   end
